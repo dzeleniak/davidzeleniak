@@ -3,6 +3,7 @@
 	--text-color: #f3f4f6;
 	--muted-color: #c9d1d9;
 	--accent-color: #759aff;
+	/* --accent-color: #ff8c00; */
 	--border-color: rgba(255,255,255,0.10);
 	--border-color-strong: rgba(255,255,255,0.18);
 	--surface: rgba(255,255,255,0.02);
@@ -20,6 +21,9 @@ body {
   height: auto;
 }
 
+/* Defensive: prevent any accidental horizontal overflow on small devices */
+html, body { overflow-x: hidden; }
+
 .container {
 	max-width: 980px;
 	margin: 18vh auto 12vh;
@@ -27,17 +31,9 @@ body {
 }
 
 .site-header {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
 	z-index: 10;
-	display: flex;
-	justify-content: flex-end;
-	padding: 1.1rem 1.25rem;
-	background: rgba(15, 15, 15, 0.55);
-	backdrop-filter: blur(6px);
 }
+
 .site-header__right {
 	display: flex;
 	gap: 0.9rem;
@@ -111,8 +107,16 @@ a:hover { color: var(--accent-color); }
 	border-radius: .5rem;
 	color: var(--text-color);
 	background: var(--surface);
-	white-space: nowrap;
+ white-space: nowrap;
 }
+
+/* allow chips to wrap on small screens so they don't create horizontal overflow */
+@media (max-width: 520px) {
+	.chip { white-space: normal; }
+}
+
+/* make images and svgs responsive to container widths to avoid overflow */
+img, svg { max-width: 100%; height: auto; }
 
 .section { margin: 1.75rem 0; }
 .muted { color: var(--muted-color); }

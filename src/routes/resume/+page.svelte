@@ -16,7 +16,7 @@
       tech: ['Python', 'C++', 'FastAPI', 'Asyncio', 'NATS', 'gRPC', 'Kubernetes', 'Helm', 'Docker', 'GitLab CI/CD', 'Spring Boot']
     },
     {
-      company: 'Kimberly-Clark — Digital Innovation',
+      company: 'Kimberly-Clark',
       title: 'Full-Stack Engineer',
       period: 'Jul 2023 — Jan 2024',
       logo: '/logos/kimberlyclark.png',
@@ -29,7 +29,7 @@
       tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Azure', 'Terraform', 'Cosmos DB', 'Azure DevOps']
     },
     {
-      company: 'Kimberly-Clark — Infrastructure',
+      company: 'Kimberly-Clark',
       title: 'Cloud Automation Engineer',
       period: 'May 2022 — Jul 2023',
       logo: '/logos/kimberlyclark.png',
@@ -59,7 +59,7 @@
     },
     {
       company: 'University of Nevada, Las Vegas',
-      title: 'Software Development Intern — Identity Mgmt',
+      title: 'Software Development Intern',
       period: 'Aug 2018 — May 2019',
       logo: '/logos/unlv.png',
       bullets: ['ASP.NET & Java Spring apps for identity/portal systems'],
@@ -115,6 +115,11 @@
               {/each}
             </div>
           {/if}
+
+          <!-- show the period/date as part of the expanded content -->
+          <div class="open-meta">
+            <time>{r.period}</time>
+          </div>
         </details>
       </article>
     {/each}
@@ -213,6 +218,16 @@
     color: #9aa4b2;
   }
 
+  /* hide the date/period and separator in the compact summary to reduce horizontal width */
+  .meta time,
+  .meta .sep {
+    display: none;
+  }
+
+  /* when expanded, show a dedicated date block inside the content */
+  .open-meta { display: none; }
+  details[open] .open-meta { display: block; color: var(--muted-color); font-size: .95rem; margin: 0 1rem 1rem 1rem; }
+
   .role { color: var(--text-color); }
 
   .bullets {
@@ -269,5 +284,12 @@
     .timeline::before { left: .33rem; }
     .item { grid-template-columns: 1rem 1fr; }
     .dot { width: .6rem; height: .6rem; margin-top: .6rem; }
+    /* slightly smaller company names on mobile */
+    .header h3 { font-size: 1rem; }
+
+    /* hide company name on mobile in collapsed state to save horizontal space;
+       show it when the card is expanded (details[open]) so users can still see full info */
+    .header h3 { display: none; }
+    details[open] .header h3 { display: block; }
   }
 </style>
